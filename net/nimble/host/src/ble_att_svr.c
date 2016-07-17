@@ -1551,7 +1551,8 @@ ble_att_svr_rx_read_blob(uint16_t conn_handle, struct os_mbuf **rxom)
         goto done;
     }
 
-    rc = ble_att_svr_build_read_blob_rsp(ctxt.attr_data, ctxt.data_len, mtu,
+    rc = ble_att_svr_build_read_blob_rsp(ctxt.attr_data + ctxt.offset,
+                                         ctxt.data_len - ctxt.offset, mtu,
                                          &txom, &att_err);
     if (rc != 0) {
         err_handle = req.babq_handle;
